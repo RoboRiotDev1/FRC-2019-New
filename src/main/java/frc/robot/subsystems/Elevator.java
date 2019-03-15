@@ -1,20 +1,16 @@
 package frc.robot.subsystems;
+
 import frc.robot.Setup;
-import frc.robot.subsystems.*;
-
-import javax.lang.model.util.ElementScanner6;
-
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
 public class Elevator extends Subsystem {
 
-	static Elevator mInstance=new Elevator();
+	static Elevator mInstance = new Elevator();
 	public DigitalInput mElevatorTopProxHardware;
 	public DigitalInput mElevatorBottomProxHardware;
 	LIDAR mElevatorLaser;
@@ -163,6 +159,7 @@ public class Elevator extends Subsystem {
 
 //This Varible is used in the Auto Actions To Stop it from moving
 public boolean FinishedMoving;
+
 public double ElevatorDistanceToTravel = 0;
 public double ElevatorDistanceToTravelHigh = 0;
 public double ElevatorDistanceToTravelLow = 0;
@@ -170,6 +167,7 @@ String printtype = "";
 String printposition= "";
 public boolean heartbeat = false;
 public int heartbeatcount = 0;
+
     public void setElevatorPosition(String type, String position)
 	{
 		double ElevatorDistance = mElevatorLaser.getDistance();
@@ -232,7 +230,7 @@ public int heartbeatcount = 0;
 		{
 			setElevatorPosition(printtype, printposition);
 		}
-		//System.out.println(mElevatorLaser.getDistance());
+		
 		outputToSmartDashboard();
 	}
 	

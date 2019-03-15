@@ -1,11 +1,7 @@
 package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-import java.lang.Math;
-import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.VictorSP;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.Setup;
 
@@ -53,7 +49,7 @@ public class Drivetrain extends Subsystem {
 		mRightRearDrive.setRampRate(.2);
 	
 		System.out.println("Drivetrain Done Initializing.");
-		
+
 		}
     
     private DriveGear mDriveGear;

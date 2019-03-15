@@ -271,7 +271,7 @@ public static int kClimber3Id = 11;
 
 //SOLENOIDS (0-7)
 
-//Shifters
+//Shifter
 public static int kShifterSolenoidId = 1;
 
 

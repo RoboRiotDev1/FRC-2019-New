@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Setup;
 
@@ -18,7 +19,12 @@ public class Climber extends Subsystem {
     VictorSPX mClimber1;
     VictorSPX mClimber2;
     VictorSPX mClimber3;
-    
+
+    //Prox Sensors
+    DigitalInput mClimber1Prox;
+    DigitalInput mClimber2Prox;
+    DigitalInput mClimber3Prox;
+
     public Climber(){
 	
     	mClimber1 = new VictorSPX(Setup.kClimber1Id);
@@ -28,10 +34,14 @@ public class Climber extends Subsystem {
         mClimber2.setInverted(false);
         
         mClimber3 = new VictorSPX(Setup.kClimber3Id);
-		mClimber3.setInverted(false);
+        mClimber3.setInverted(false);
+        
+        mClimber1Prox = new DigitalInput(Setup.kClimber1Prox);
+        mClimber2Prox = new DigitalInput(Setup.kClimber2Prox);
+        mClimber3Prox = new DigitalInput(Setup.kClimber3Prox);
         
         System.out.println("Climber Done Initializing.");
-        
+
 		}
     
     private ClimberState mClimberState;
@@ -48,9 +58,19 @@ public class Climber extends Subsystem {
 
         mClimberState = ClimberState.Climbing;
         
-        mClimber1.set(ControlMode.PercentOutput, 1);
-        mClimber2.set(ControlMode.PercentOutput, 1);
-        mClimber3.set(ControlMode.PercentOutput, 1);
+        if ((mClimber1Prox.get() == false) && (mClimber2Prox.get() == false) && (mClimber3Prox.get() == false))
+        {
+            mClimber1.set(ControlMode.PercentOutput, 1);
+            mClimber2.set(ControlMode.PercentOutput, 1);
+            mClimber3.set(ControlMode.PercentOutput, 1);
+        }
+        else
+        {
+            mClimber1.set(ControlMode.PercentOutput, 0);
+            mClimber2.set(ControlMode.PercentOutput, 0);
+            mClimber3.set(ControlMode.PercentOutput, 0);
+        }
+        
     	
     }
 

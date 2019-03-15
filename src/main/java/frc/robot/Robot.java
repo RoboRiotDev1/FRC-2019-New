@@ -41,9 +41,6 @@
 
 
 package frc.robot;
-import frc.robot.auto.modes.DeliverHatchHighPosition;
-import frc.robot.auto.modes.DeliverHatchLowPosition;
-import frc.robot.auto.modes.DeliverHatchMiddlePosition;
 import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
