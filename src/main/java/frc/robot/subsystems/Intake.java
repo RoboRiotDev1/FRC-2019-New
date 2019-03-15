@@ -4,11 +4,7 @@ import frc.robot.Setup;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.VictorSP;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Relay;
 
@@ -36,7 +32,7 @@ public class Intake extends Subsystem
 
 public Intake() {
 		
-	mSetup = new Setup();
+		mSetup = new Setup();
 
 		mIntake= new VictorSPX(Setup.kIntakeId);
 		mIntake.setInverted(false);
@@ -55,7 +51,8 @@ public Intake() {
 
 		mstopSuckingRelay = new Relay(0);
 		mIntakeHatchState=IntakeHatchState.SUCK;
-		//System.out.println("Intake Done Initializing.");
+		
+		System.out.println("Intake Done Initializing.");
     }
 //-------------------------------------------------------------------------------Intake Cargo----------------------------------------------------------------------------------//
 
@@ -147,7 +144,7 @@ public void SetIntakeRotaryCargo(){
 		//Move To Cargo Limit
 		if (mIntakeCargoLimit.get() == true)
 		{
-			mIntakeRotary.set(ControlMode.PercentOutput, .5);
+			mIntakeRotary.set(ControlMode.PercentOutput, 1);
 		}
 		else
 		{
@@ -163,7 +160,7 @@ public void SetIntakeRotaryHatch(){
 	//Checks if it is right state
 	if (mIntakeHatchLimit.get() == true)
 	{	
-		mIntakeRotary.set(ControlMode.PercentOutput, -.5);
+		mIntakeRotary.set(ControlMode.PercentOutput, -1);
 		//System.out.println("Going to Hatch");
 	}
 	else

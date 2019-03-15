@@ -51,7 +51,9 @@ public class Drivetrain extends Subsystem {
     	mRightRearDrive.set(0);
 		mRightRearDrive.setInverted(true);
 		mRightRearDrive.setRampRate(.2);
-    
+	
+		System.out.println("Drivetrain Done Initializing.");
+		
 		}
     
     private DriveGear mDriveGear;

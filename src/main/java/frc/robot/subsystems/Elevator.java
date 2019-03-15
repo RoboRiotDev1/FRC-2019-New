@@ -41,6 +41,7 @@ public class Elevator extends Subsystem {
 	mElevatorTopProxHardware = new DigitalInput(Setup.kElevatorTopProx);
 	mElevatorLaser = new LIDAR(new DigitalInput(Setup.kElevatorLaser));
 
+	System.out.println("Elevator Done Initializing.");
 }
 
     public static Elevator getInstance() {

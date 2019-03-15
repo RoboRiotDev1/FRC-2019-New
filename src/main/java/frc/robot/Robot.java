@@ -44,23 +44,14 @@ package frc.robot;
 import frc.robot.auto.modes.DeliverHatchHighPosition;
 import frc.robot.auto.modes.DeliverHatchLowPosition;
 import frc.robot.auto.modes.DeliverHatchMiddlePosition;
+import frc.robot.subsystems.Climber;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
-
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
-import java.util.Scanner;
-
-import edu.wpi.cscore.CameraServerJNI;
-import edu.wpi.first.wpilibj.IterativeRobot;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import edu.wpi.first.wpilibj.shuffleboard.*;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import frc.robot.subsystems.LED;
 import frc.robot.auto.AutoExecuter;
 
+import edu.wpi.first.wpilibj.IterativeRobot;
 
 
 public class Robot extends IterativeRobot  {
@@ -71,6 +62,7 @@ public class Robot extends IterativeRobot  {
   Elevator mElevator;
   Intake mIntake;
   LED mLED;
+  Climber mClimber;
 
   AutoExecuter mAutoExecuter = null;
   
@@ -92,41 +84,7 @@ public class Robot extends IterativeRobot  {
   }
   
 
-
- public void auto(String automode)
- {
-
-  if (mSetup.AutoRunning == false)
-  {
-    mSetup.AutoRunning = true;
-    
-    if (mAutoExecuter != null) {
-
-      mAutoExecuter.stop();
-
-    }
-
-    mAutoExecuter = new AutoExecuter();
-
-   switch(automode) {
-
-     case "DeliverHatchHighPosition":
-      mAutoExecuter.setAutoRoutine(new DeliverHatchHighPosition());
-      mAutoExecuter.start();
- 			break;
-     case "DeliverHatchMiddlePosition":
-      mAutoExecuter.setAutoRoutine(new DeliverHatchMiddlePosition());
-      mAutoExecuter.start();
- 		  break;
-     case "DeliverHatchLowPosition":
-     mAutoExecuter.setAutoRoutine(new DeliverHatchLowPosition());
-     mAutoExecuter.start();
-       break;
-     default:
- 			break;
-     }
-    }
-}
+ 
 public void manual()
 {
     
@@ -146,7 +104,6 @@ public void manual()
     if(mSetup.getDriverFastSpeed())
     {
       dpadSpeed = dpadSpeed * 2;
-
     }
     else
     {
@@ -172,8 +129,16 @@ public void manual()
 
 
     //Climber
+    if(mSetup.getDriverClimbButton()){
+      mClimber.Climb();
+    }
+    else if (mSetup.getDriverFallButton()){
+      mClimber.Fall();
+    }
+    else {
+      mClimber.stop();
+    }
 
-    
     //Cargo Intake
 		if(mSetup.getSecondaryCargoIntakeButton()) {
       mIntake.intakeCargo();
@@ -257,24 +222,13 @@ public void manual()
 
   @Override
   public void robotInit() {
- 
+    System.out.println("Robot Init");
     mSetup = Setup.getInstance();
     mDrivetrain = Drivetrain.getInstance();
     mIntake = Intake.getInstance();
     mLED = LED.getInstance();
     mElevator = Elevator.getInstance();
-    System.out.println("Robot Init");
-
-    //Camera Setup
-    /*
-    HttpCamera httpCamera = new HttpCamera("CoprocessorCamera", "frcvision.local:1181/stream.mjpg");
-    CameraServer.getInstance().addCamera(httpCamera);
-    Shuffleboard.getTab("Tab")
-    .add(httpCamera);
-    */
-
     stopAllSubsystems();
-  
   }
 
   @Override
@@ -282,13 +236,12 @@ public void manual()
     System.out.println("Auto Init");
 		stopAllSubsystems();
 		updateAllSubsystems();
-		
 	}
 	
 	@Override
 	public void autonomousPeriodic() {
     manual();
-		updateAllSubsystems();
+    updateAllSubsystems();
 	}
 
   
@@ -302,8 +255,6 @@ public void manual()
   
   @Override
 	public void disabledPeriodic() {
-
-  System.out.println("Disabled Periodic");
 
 	 //LED Lights
    if(mSetup.GetLEDClearButton()){
@@ -337,37 +288,16 @@ public void manual()
 
   @Override
 	public void teleopInit(){
+    System.out.println("Tele Init");
 		stopAllSubsystems();
     mDrivetrain.lowGear();
-    System.out.println("Tele Init");
     updateAllSubsystems();
-    
   }
   
   @Override
   public void teleopPeriodic() {
     manual();
     updateAllSubsystems();
-
-    // if (mSetup.getSecondaryAutoStopButton())
-    // {
-    //   mAutoExecuter.stop();
-    // }
-
-    // if(mSetup.getSecondaryElevatorMiddleButton())
-    // {
-    //   auto("DeliverHatchMiddlePosition");
-    // }
-    // if (mSetup.AutoRunning = false)
-    // {
-    //   //manual();
-    // }
-    
-    // else
-    // {
-    //   manual();
-    // }
-
   }
  
 }

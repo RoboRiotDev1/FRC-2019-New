@@ -2,16 +2,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj.VictorSP;
-//import edu.wpi.first.wpilibj.Joystick; 
-//never used
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import edu.wpi.first.wpilibj.DigitalInput;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
@@ -29,6 +22,7 @@ public Setup()
 this.ControlBoard();
 
 }
+
 //----------------------------------------------------------------------------Controls-----------------------------------------------------------------------------------------//
     
     //Creates Joystick Object
@@ -37,11 +31,11 @@ this.ControlBoard();
     Joystick mSwitchboard;
  
 
-    //Initialize Joystick Object
+    //Initialize Joystick Objects
     void ControlBoard() {
     	mDriverStick = new Joystick(0);
-        mSecondaryDriverStick = new Joystick(1);
-        mSwitchboard = new Joystick(2);
+      mSecondaryDriverStick = new Joystick(1);
+      mSwitchboard = new Joystick(2);
     }
 
      //DRIVER CONTROLLER
@@ -102,13 +96,11 @@ this.ControlBoard();
 
     //Cargo Intake 
     public boolean getSecondaryCargoIntakeButton(){
-      //System.out.println(mSecondaryDriverStick.getRawAxis(2));
     	return mSecondaryDriverStick.getRawAxis(2) > .2;
     }
     
     public boolean getSecondaryCargoOuttakeButton()
     {
-      //System.out.println(mSecondaryDriverStick.getRawAxis(3));
     	return mSecondaryDriverStick.getRawAxis(3) > .2;
     }
     
@@ -118,14 +110,15 @@ this.ControlBoard();
     }
     
     public boolean getMrHuckStopButton(){
-    	return mSecondaryDriverStick.getRawButton(6);
+      
+      return mSecondaryDriverStick.getPOV() == 90;
     }
 
     public boolean getVaccuumReleaseButton()
     {
-      return mSecondaryDriverStick.getPOV() == 90;
-      
+      return mSecondaryDriverStick.getRawButton(6);
     }
+
     //Intake Rotary
     public boolean getSecondaryIntakeRotaryCargoButton(){
     	return  mSecondaryDriverStick.getPOV()>90 && mSecondaryDriverStick.getPOV()<270;
@@ -137,9 +130,7 @@ this.ControlBoard();
     public double getSecondaryIntakeRotaryAnalog()
     {
       return mSecondaryDriverStick.getRawAxis(1) * -1;
-
     }
-
 
     //Elevator 
     public double getSecondaryElevatorAnalog(){
@@ -156,11 +147,11 @@ this.ControlBoard();
 	
 	public boolean getSecondaryElevatorLowButton(){
     	return mSecondaryDriverStick.getRawButton(1);
-    }
+  }
 
     public boolean getSecondaryAutoStopButton(){
       return mSecondaryDriverStick.getRawButton(3);
-    }
+  }
 
     //LED Controls 
 
@@ -252,15 +243,7 @@ public boolean AutoRunning = false;
 //-----------------------------------------------------------------------------------Constants----------------------------------------------------------------------------------//
 
 
-//-subsystem speed motor speeds--//
-
-//Intake
-public static double kIntakeSpeed = 1;
-public static double kIntakeReverseSpeed = -1;
-public static double kSpoolSpeed = .25;
-
-
-//-static port assignments-//
+//Port Assignments
 
 //CAN
 
@@ -287,15 +270,16 @@ public static int kClimber3Id = 11;
 
 
 //SOLENOIDS (0-7)
+
 //Shifters
 public static int kShifterSolenoidId = 1;
 
 
 //ANALOG (0-4) 
 
-//Lasers
-// public static int kLeftAllignLaserId = 1;
-// public static int kRightAllignLaserId = 2;
+//Ardunio
+public static int kArdunio = 1;
+
 
 //DIO
 public static int kElevatorBottomProx = 0;
@@ -303,5 +287,8 @@ public static int kElevatorTopProx = 1;
 public static int kIntakeCargoLimit = 2;
 public static int kIntakeHatchLimit = 3;
 public static int kElevatorLaser = 4;
+public static int kClimber1Prox = 5;
+public static int kClimber2Prox = 6;
+public static int kClimber3Prox = 7;
 
 }

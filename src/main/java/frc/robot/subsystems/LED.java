@@ -20,7 +20,7 @@ public class LED extends Subsystem
 
     public LED()
     {
-        mLEDPort7 = new DigitalOutput(7);
+        mLEDPort7 = new DigitalOutput(8);
         mLEDPort8 = new DigitalOutput(8);
         mLEDPort9 = new DigitalOutput(9);
     }   

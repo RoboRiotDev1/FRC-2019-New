@@ -29,7 +29,9 @@ public class Climber extends Subsystem {
         
         mClimber3 = new VictorSPX(Setup.kClimber3Id);
 		mClimber3.setInverted(false);
-		
+        
+        System.out.println("Climber Done Initializing.");
+        
 		}
     
     private ClimberState mClimberState;
