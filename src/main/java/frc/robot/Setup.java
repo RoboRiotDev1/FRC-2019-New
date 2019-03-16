@@ -230,11 +230,6 @@ this.ControlBoard();
 
 //----------------------------------------------------------------------------Hardware Map------------------------------------------------------------------------------------//
 
-
-
-
-
-
 //Speed Controllers
 public VictorSPX mIntakeHardware;
 public VictorSPX mMrHuckHardware;
