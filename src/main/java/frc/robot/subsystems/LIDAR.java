@@ -3,6 +3,24 @@ import edu.wpi.first.wpilibj.Counter;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DigitalSource;
 
+//https://github.com/GirlsOfSteelRobotics/Docs/wiki/LIDAR-Lite-Distance-Sensor
+
+/*
+
+-------------------------Wireing Diagram---------------------
+
+roboRIO
+DIO Port                           LIDAR-Lite
+--------                           --------
+Power  __________________________  +5V Power
+
+Signal __________________________  Mode Select
+               | 1KOhm
+               |_/\/\/\_
+Ground _________________|________  Ground
+
+
+*/
 public class LIDAR {
 /*
  * Adjust the Calibration Offset to compensate for differences in each unit.

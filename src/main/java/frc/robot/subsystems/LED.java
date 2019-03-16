@@ -4,7 +4,31 @@ import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 
-
+/*------------------------------------------------- LED -----
+  |  Name: LED.java
+  |
+  |  Purpose:  This is the most important subsystem that sends values to an ardunio.
+  |            The ardunio then changes the led lights based on the analog signal. 
+  |
+  |  Varibles:
+  | 
+  |  Climber State ENUM: This is used to output to the smart dashboard what state 
+  |                      the climber is in for debugging.
+  |
+  |  Methods: 
+  |
+  |   Climb: This pushes the stilts down to climb the HAB and Sets the Climber
+  |          State ENUM to Climb
+  |   Fall: This retracts the stilts to descend and Sets the Climber
+  |         State ENUM to Fall
+  |   Stop: This stops the climber with brakes and Sets the Climber
+  |         State ENUM to Nothing
+  |
+  |  Returns:
+  |
+  |  This returns the Climber State ENUM to the Smartdashboard.
+  |  
+  *-------------------------------------------------------------------*/
 public class LED extends Subsystem
 {
 
