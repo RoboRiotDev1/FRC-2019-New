@@ -5,6 +5,32 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.Solenoid;
 import frc.robot.Setup;
 
+/*------------------------------------------------- Drivetrain -----
+  |  Name: Drivetrain.java
+  |
+  |  Purpose:  This subsystem controls the drive motors of the robot.
+  |            The subsystem also controls the drive gear. 
+  |
+  |  Varibles:
+  | 
+  |  Drive Gear ENUM: This is used to output to the smart dashboard what state 
+  |                   the drive gear is in for debugging.
+  |
+  |  Methods: 
+  |
+  |   setTankDriveSpeed: This sets the speed of the drive motors given the parameters
+  |						 for left and Right speeds. 
+  |   setLowGear: This sets the drive gear to high.
+  |   setHighGear: This sets the drive gear to low.
+  |   stop: This stops the Subsystem
+  |
+  |  Returns:
+  |
+  |  This returns the Drive Gear ENUM to the Smartdashboard.
+  |  This also returns the speeds for each motor to the Smartdashboard.
+  |  
+  *-------------------------------------------------------------------*/
+
 
 public class Drivetrain extends Subsystem {
 

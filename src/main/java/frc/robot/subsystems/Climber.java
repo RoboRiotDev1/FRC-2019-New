@@ -6,6 +6,28 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Setup;
 
+/*------------------------------------------------- Climber -----
+  |  Name: Climber.java
+  |
+  |  Purpose:  This subsystem pushes stilts down using the three climber motors.
+  |            The wheels on the botton of the stilts use the drive train to run. 
+  |
+  |  Varibles:
+  | 
+  |  Climber State ENUM: This is used to output to the smart dashboard what state 
+  |                      the climber is in for debugging.
+  |
+  |  Methods: 
+  |
+  |   Climb: This pushes the stilts down to climb the HAB. 
+  |   Fall: This retracts the stilts to descend.
+  |   Stop: This stops the climber with brakes.
+  |
+  |  Returns:
+  |
+  |  This returns the Climber State ENUM to the Smartdashboard.
+  |  
+  *-------------------------------------------------------------------*/
 
 public class Climber extends Subsystem {
 

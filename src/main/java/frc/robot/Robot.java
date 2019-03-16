@@ -37,7 +37,13 @@
                                                                                                    
 */
 
-
+ /*------------------------------------------------- Main Robot Class -----
+  |  Name: Robot.java 
+  |
+  |  Purpose: This is what runs on the robot and calls the subsystems as needed. 
+  |
+  |  Returns: This class returns values to the smartdashboard in the update subsystem method.
+  *-------------------------------------------------------------------*/
 
 
 package frc.robot;
@@ -72,7 +78,7 @@ public class Robot extends IterativeRobot  {
   }
   
   public void stopAllSubsystems(){
-    //System.out.println("Robot Stopping");
+    
 		mDrivetrain.stop();
 		mDrivetrain.lowGear();
 		mIntake.stop();
@@ -80,7 +86,12 @@ public class Robot extends IterativeRobot  {
     mLED.Clear();
   }
   
-
+/*------------------------------------------------- Manual Controls -----
+  |  Name: manual 
+  |
+  |  Purpose: These are the manual controls for the robot. Setup.java contains the control mappings.
+  |
+  *-------------------------------------------------------------------*/
  
 public void manual()
 {
@@ -215,7 +226,18 @@ public void manual()
 
 }
 
-
+/*------------------------------------------------- Robot Methods -----
+  |  Name: robotInit, autonomousInit, 
+          autonomousPeriodic, disabledInit, 
+          disabledPeriodic, teleopInit, 
+          teleopPeriodic
+  |
+  |  Purpose: These are the main robot methods that are ran by either the DriverStation or FMS System.
+              The Init means initialized. This runs when either Tele-Op or Automous is started. 
+              The periodic method for both Tele-Op and Auto runs continuously in the background.
+  |
+  |  Returns: The Methods wil print when the Robot initializes differnt states. 
+  *-------------------------------------------------------------------*/
 
   @Override
   public void robotInit() {
@@ -253,7 +275,7 @@ public void manual()
   @Override
 	public void disabledPeriodic() {
 
-	 //LED Lights
+	 //LED Lights Controls
    if(mSetup.GetLEDClearButton()){
     mLED.Clear();
   }

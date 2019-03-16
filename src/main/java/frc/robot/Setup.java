@@ -24,8 +24,47 @@ this.ControlBoard();
 }
 
 //----------------------------------------------------------------------------Controls-----------------------------------------------------------------------------------------//
-    
-    //Creates Joystick Object
+ 
+/*------------------------------------------------- Controls -----
+  |  Name: Various Methods for returning buttons 
+  |
+  |  Purpose:  This is the main control mapping for each one of the buttons. 
+  |
+  |  Returns: This is what returns the buttons from the controllers to a public area 
+  |           for the Robot.java file to read for maunal control 
+  |           (Note you can use an Axis as a button with a > .2 deadzone.)
+  *-------------------------------------------------------------------*/
+
+  /*------------------------------------------------- Xbox Controller Key -----
+  |  
+  |   A = 1  
+  |   B = 2 
+  |   X = 3
+  |   Y = 4
+  |      
+  |   Left Joystick X = Axis 0 
+  |   Left Joystick Y = Axis 1
+  |   Left Joystick Button = 9
+  |
+  |   Right Joystick X = Axis 4 
+  |   Right Joystick Y = Axis 5
+  |   Left Joystick Button = 10
+  |   
+  |   Left Trigger = Axis 2
+  |   Right Trigger = Axis 3
+  |
+  |   Left Button = 5
+  |   Right Button = 6
+  |
+  |   Start = 7
+  |   Select = 8
+  |
+  |   D-Pad = POV
+  |
+  *-------------------------------------------------------------------*/
+
+
+    //Creates Joystick Objects
     Joystick mDriverStick;
     Joystick mSecondaryDriverStick;
     Joystick mSwitchboard;
@@ -41,7 +80,6 @@ this.ControlBoard();
      //DRIVER CONTROLLER
     
     //Drive Controls
-
     public boolean getDriverFastSpeed()
     {
       return mDriverStick.getRawButton(1);
@@ -90,9 +128,6 @@ this.ControlBoard();
 
     
     //SECONDARY CONTROLLER
-
-
-    //Secondary Functional Controls
 
     //Cargo Intake 
     public boolean getSecondaryCargoIntakeButton(){
@@ -195,6 +230,11 @@ this.ControlBoard();
 
 //----------------------------------------------------------------------------Hardware Map------------------------------------------------------------------------------------//
 
+
+
+
+
+
 //Speed Controllers
 public VictorSPX mIntakeHardware;
 public VictorSPX mMrHuckHardware;
@@ -238,9 +278,19 @@ void HardwareMap() {
         
     }
 }
+
+
 //-----------------------------------------------------------------------------------Not a Constant----------------------------------------------------------------------------------//
 public boolean AutoRunning = false;
 //-----------------------------------------------------------------------------------Constants----------------------------------------------------------------------------------//
+
+/*------------------------------------------------- Port Assignments -----
+  |  Name: Port Assignments
+  |
+  |  Purpose: This is a public area for constant Port Assignments it is used 
+  |            for declaring motors in different Subsystems.  
+  |
+  *-------------------------------------------------------------------*/
 
 
 //Port Assignments
