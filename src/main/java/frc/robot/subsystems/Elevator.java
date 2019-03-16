@@ -8,6 +8,45 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 
+/*------------------------------------------------- Elevator -----
+  |  Name: Elevator.java
+  |
+  |  Purpose:  This subsystem controls the Elevator motors of the robot.
+  |
+  |			   The Elevator has a limit swtich on the botton and a prox at the top.
+  | 		   When these are trigged it stops the Elevator from moving in the direction that is
+  |			   triggered.  
+  |
+  |            The subsystem also has the height of the elevator using a LIDAR Lite 3 Laser. 
+  |			   On the robot there is a laser mounted to the elevator that moves up and down 
+  |			   with the elevator. 
+  |
+  |  Varibles:
+  | 
+  |  Elevator Postitions: These heights are compared to to the laser for auto height adjustment.
+  |						  There is also a slowdown point that will slowdown the elevator when it 
+  |						  reaches that point. This keeps the tension on the rope and protects the robot.
+  |                   
+  |
+  |  Methods: 
+  |
+  |   setElevatorSpeed: This sets the speed of the spool motors with a given speed.
+  |						This also has limits built into it to prevent the elevator from destroying itself.
+  |						 
+  |   ElevatorDistanceCalulator: This returns the distance to travel given the parameters. 
+  |
+  |   setElevatorPosition: This uses the ElevatorDistanceCalulator to determine how far to move and moves the elevator to taht location. 
+  |							There are low and high distances used to speed up the postition settings by allowing slight error.
+  |							
+  |   stop: This stops the Subsystem
+  |
+  |  Returns:
+  |
+  |  This returns the Elevator Laser Distance to the Smartdashboard.
+  |  
+  |  
+  *-------------------------------------------------------------------*/
+
 public class Elevator extends Subsystem {
 
 	static Elevator mInstance = new Elevator();

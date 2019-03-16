@@ -19,9 +19,12 @@ import frc.robot.Setup;
   |
   |  Methods: 
   |
-  |   Climb: This pushes the stilts down to climb the HAB. 
-  |   Fall: This retracts the stilts to descend.
-  |   Stop: This stops the climber with brakes.
+  |   Climb: This pushes the stilts down to climb the HAB and Sets the Climber
+  |          State ENUM to Climb
+  |   Fall: This retracts the stilts to descend and Sets the Climber
+  |         State ENUM to Fall
+  |   Stop: This stops the climber with brakes and Sets the Climber
+  |         State ENUM to Nothing
   |
   |  Returns:
   |

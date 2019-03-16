@@ -8,6 +8,37 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Relay;
 
+/*------------------------------------------------- Intake -----
+  |  Name: Intake.java
+  |
+  |  Purpose:  This subsystem controls both intaking and outtaking gamepieces along with 
+  | 		   controling the rotary arm of the intake.
+  |             
+  |
+  |  Varibles:
+  | 
+  |  Intake States ENUM: For the rotary arm, cargo intake, and hatch intake there are enum states.  
+  |                      When the state is set the Intake will preform the actions associated with it.
+  |						 These states are controled by the secondary driver through robot.java.
+  |						
+  |  Methods: 
+  |
+  |   intakeCargo/Hatch: Intakeing the cargo makes the intake motors turn in.
+  |						 Intaking Hatches enables Vacuum 	
+  |          
+  |   outtakeCargo/Hatch: Outtaking the cargo makes teh intake motors turn out.
+  |						  Outtaking Hatches enables a relay to realse the hatch form the vacuum.
+  |						  (Note: There are seprate controls to stop the vacuum and to set the relay)
+  |         
+  |   Stop: This stops all subsystem motors
+  |         
+  |
+  |  Returns:
+  |
+  |  This returns the Intake State ENUMs to the Smartdashboard.
+  |  
+  *-------------------------------------------------------------------*/
+
 public class Intake extends Subsystem
 {
 
