@@ -83,20 +83,33 @@ public class Climber extends Subsystem {
 
         mClimberState = ClimberState.Climbing;
         
-        if ((mClimber1Prox.get() == false) && (mClimber2Prox.get() == false) && (mClimber3Prox.get() == false))
+        if (mClimber1Prox.get() == false)
         {
             mClimber1.set(ControlMode.PercentOutput, 1);
-            mClimber2.set(ControlMode.PercentOutput, 1);
-            mClimber3.set(ControlMode.PercentOutput, 1);
         }
         else
         {
             mClimber1.set(ControlMode.PercentOutput, 0);
+        }
+
+        if (mClimber2Prox.get() == false)
+        {
+            mClimber2.set(ControlMode.PercentOutput, 1);
+        }
+        else
+        {
             mClimber2.set(ControlMode.PercentOutput, 0);
+        }
+
+        if (mClimber3Prox.get() == false)
+        {
+            mClimber3.set(ControlMode.PercentOutput, 1);
+        }
+        else
+        {
             mClimber3.set(ControlMode.PercentOutput, 0);
         }
         
-    	
     }
 
     public void Fall(){
