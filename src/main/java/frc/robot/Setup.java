@@ -335,5 +335,7 @@ public static int kElevatorLaser = 4;
 public static int kClimber1Prox = 5;
 public static int kClimber2Prox = 6;
 public static int kClimber3Prox = 7;
-
+public static int kLED1 = 8;
+public static int kLED2 = 9;
+public static int kLED3 = 10;
 }

@@ -2,18 +2,22 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalOutput;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Setup;
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.I2C;
+import edu.wpi.first.wpilibj.Timer;
+
 
 /*------------------------------------------------- LED -----
   |  Name: LED.java
   |
   |  Purpose:  This is the most important subsystem that sends values to an ardunio.
-  |            The ardunio then changes the led lights based on the analog signal. 
+  |            The ardunio then changes the led lights based singals recived 
   |
   |  Varibles:
+  |             DIO
   | 
-  |  Climber State ENUM: This is used to output to the smart dashboard what state 
-  |                      the climber is in for debugging.
+  |  
   |
   |  Methods: 
   |
@@ -29,6 +33,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
   |  This returns the Climber State ENUM to the Smartdashboard.
   |  
   *-------------------------------------------------------------------*/
+
+  
 public class LED extends Subsystem
 {
 
@@ -38,15 +44,16 @@ public class LED extends Subsystem
         return mInstance;
     }
 
-    DigitalOutput mLEDPort7;
-    DigitalOutput mLEDPort8;
-    DigitalOutput mLEDPort9;
+    DigitalOutput mLEDPort1;
+    DigitalOutput mLEDPort2;
+    DigitalOutput mLEDPort3;
+    Setup mSetup = new Setup();
 
     public LED()
     {
-        mLEDPort7 = new DigitalOutput(8);
-        mLEDPort8 = new DigitalOutput(8);
-        mLEDPort9 = new DigitalOutput(9);
+        mLEDPort1 = new DigitalOutput(Setup.kLED1);
+        mLEDPort2 = new DigitalOutput(Setup.kLED2);
+        mLEDPort3 = new DigitalOutput(Setup.kLED3);
     }   
 
     @Override
@@ -68,60 +75,60 @@ public class LED extends Subsystem
     public void Clear()
     {
         //000
-        mLEDPort7.set(true);
-        mLEDPort8.set(true);
-        mLEDPort9.set(true);
+        mLEDPort1.set(true);
+        mLEDPort2.set(true);
+        mLEDPort3.set(true);
     }
     public void Rainbow()
     {
         //001
-        mLEDPort7.set(true);
-        mLEDPort8.set(true);
-        mLEDPort9.set(false);
+        mLEDPort1.set(true);
+        mLEDPort2.set(true);
+        mLEDPort3.set(false);
     }
 
     public void Cargo()
     {
         //010
-        mLEDPort7.set(true);
-        mLEDPort8.set(false);
-        mLEDPort9.set(true);
+        mLEDPort1.set(true);
+        mLEDPort2.set(false);
+        mLEDPort3.set(true);
     }
 
     public void RedFlashyThing()
     {
         //011
-        mLEDPort7.set(true);
-        mLEDPort8.set(false);
-        mLEDPort9.set(false);
+        mLEDPort1.set(true);
+        mLEDPort2.set(false);
+        mLEDPort3.set(false);
     }
     public void TeamBlue()
     {
         //100
-        mLEDPort7.set(false);
-        mLEDPort8.set(true);
-        mLEDPort9.set(true);
+        mLEDPort1.set(false);
+        mLEDPort2.set(true);
+        mLEDPort3.set(true);
     }
     public void TeamRed()
     {
         //101
-        mLEDPort7.set(false);
-        mLEDPort8.set(true);
-        mLEDPort9.set(false);
+        mLEDPort1.set(false);
+        mLEDPort2.set(true);
+        mLEDPort3.set(false);
     }
     public void Hatch()
     {
         //110
-        mLEDPort7.set(false);
-        mLEDPort8.set(false);
-        mLEDPort9.set(true);
+        mLEDPort1.set(false);
+        mLEDPort2.set(false);
+        mLEDPort3.set(true);
     }
     public void ElevatorMaxHeighty()
     {
         //111
-        mLEDPort7.set(false);
-        mLEDPort8.set(false);
-        mLEDPort9.set(false);
+        mLEDPort1.set(false);
+        mLEDPort2.set(false);
+        mLEDPort3.set(false);
     }
 
 

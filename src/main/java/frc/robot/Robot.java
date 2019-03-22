@@ -83,7 +83,7 @@ public class Robot extends IterativeRobot  {
 		mDrivetrain.lowGear();
 		mIntake.stop();
     mElevator.stop();
-    mLED.Clear();
+    //mLED.Clear();
   }
   
 /*------------------------------------------------- Manual Controls -----
@@ -143,9 +143,9 @@ public void manual()
     else if (mSetup.getDriverFallButton()){
       mClimber.Fall();
     }
-    else {
-      mClimber.stop();
-    }
+    // else {
+    //   mClimber.stop();
+    // }
 
     //Cargo Intake
 		if(mSetup.getSecondaryCargoIntakeButton()) {
@@ -194,33 +194,33 @@ public void manual()
      } 
 
      //LED Lights
-     if(mSetup.GetLEDClearButton()){
-      mLED.Clear();
-    }
-     if(mSetup.GetLEDRainbowButton()){
-       mLED.Rainbow();
+      if(mSetup.GetLEDClearButton()){
+       mLED.Clear();
      }
-     if(mSetup.GetLEDCargoButton()){
-      mLED.Cargo();
-    }
-    if(mSetup.GetLEDRedFlashyThingButton()){
-      mLED.RedFlashyThing();
-    }
-    if(mSetup.GetLEDTeamBlueButton()){
-      mLED.TeamBlue();
-    }
-    if(mSetup.GetLEDTeamRedButton()){
-      mLED.TeamRed();
-    }
-    if(mSetup.GetLEDHatchButton()){
-      mLED.Hatch();
-    }
-    if(mSetup.GetLEDElevatorMaxHeightyButton()){
-      mLED.ElevatorMaxHeighty();
-    }
-    if(mSetup.GetLEDNoButton()){
-      mLED.Clear();
-    }
+      if(mSetup.GetLEDRainbowButton()){
+        mLED.Rainbow();
+      }
+      if(mSetup.GetLEDCargoButton()){
+       mLED.Cargo();
+     }
+     if(mSetup.GetLEDRedFlashyThingButton()){
+       mLED.RedFlashyThing();
+     }
+     if(mSetup.GetLEDTeamBlueButton()){
+       mLED.TeamBlue();
+     }
+     if(mSetup.GetLEDTeamRedButton()){
+       mLED.TeamRed();
+     }
+     if(mSetup.GetLEDHatchButton()){
+       mLED.Hatch();
+     }
+     if(mSetup.GetLEDElevatorMaxHeightyButton()){
+       mLED.ElevatorMaxHeighty();
+     }
+     if(mSetup.GetLEDNoButton()){
+       mLED.Clear();
+     }
 
     updateAllSubsystems();
 
@@ -276,33 +276,33 @@ public void manual()
 	public void disabledPeriodic() {
 
 	 //LED Lights Controls
-   if(mSetup.GetLEDClearButton()){
-    mLED.Clear();
-  }
-   if(mSetup.GetLEDRainbowButton()){
-     mLED.Rainbow();
+    if(mSetup.GetLEDClearButton()){
+     mLED.Clear();
    }
-   if(mSetup.GetLEDCargoButton()){
-    mLED.Cargo();
-  }
-  if(mSetup.GetLEDRedFlashyThingButton()){
-    mLED.RedFlashyThing();
-  }
-  if(mSetup.GetLEDTeamBlueButton()){
-    mLED.TeamBlue();
-  }
-  if(mSetup.GetLEDTeamRedButton()){
-    mLED.TeamRed();
-  }
-  if(mSetup.GetLEDHatchButton()){
-    mLED.Hatch();
-  }
-  if(mSetup.GetLEDElevatorMaxHeightyButton()){
-    mLED.ElevatorMaxHeighty();
-  }
-  if(mSetup.GetLEDNoButton()){
-    mLED.Clear();
-  }
+    if(mSetup.GetLEDRainbowButton()){
+      mLED.Rainbow();
+    }
+    if(mSetup.GetLEDCargoButton()){
+     mLED.Cargo();
+   }
+   if(mSetup.GetLEDRedFlashyThingButton()){
+     mLED.RedFlashyThing();
+   }
+   if(mSetup.GetLEDTeamBlueButton()){
+     mLED.TeamBlue();
+   }
+   if(mSetup.GetLEDTeamRedButton()){
+     mLED.TeamRed();
+   }
+   if(mSetup.GetLEDHatchButton()){
+     mLED.Hatch();
+   }
+   if(mSetup.GetLEDElevatorMaxHeightyButton()){
+     mLED.ElevatorMaxHeighty();
+   }
+   if(mSetup.GetLEDNoButton()){
+     mLED.Clear();
+   }
   }
 
   @Override
@@ -317,6 +317,7 @@ public void manual()
   public void teleopPeriodic() {
     manual();
     updateAllSubsystems();
+  
   }
  
 }
