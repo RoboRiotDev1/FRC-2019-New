@@ -77,6 +77,7 @@ public class Robot extends IterativeRobot  {
 	  mIntake.updateSubsystem();
     mElevator.updateSubsystem();
     mLED.updateSubsystem();
+    mClimber.updateSubsystem();
   }
   
   public void stopAllSubsystems(){
@@ -86,6 +87,7 @@ public class Robot extends IterativeRobot  {
 		mIntake.stop();
     mElevator.stop();
     //mLED.Clear();
+    mClimber.stop();
   }
   
 /*------------------------------------------------- Manual Controls -----
@@ -249,11 +251,11 @@ public void manual()
     {
       mLED.RedFlashyThing();
 
-      mSetup.mDriverStick.setRumble(RumbleType.kLeftRumble, 1);
-      mSetup.mDriverStick.setRumble(RumbleType.kRightRumble, 1);
+      //mSetup.mDriverStick.setRumble(RumbleType.kLeftRumble, 1);
+     // mSetup.mDriverStick.setRumble(RumbleType.kRightRumble, 1);
 
-      mSetup.mSecondaryDriverStick.setRumble(RumbleType.kLeftRumble, 1);
-      mSetup.mSecondaryDriverStick.setRumble(RumbleType.kRightRumble, 1);
+      //mSetup.mSecondaryDriverStick.setRumble(RumbleType.kLeftRumble, 1);
+      //mSetup.mSecondaryDriverStick.setRumble(RumbleType.kRightRumble, 1);
     }
     updateAllSubsystems();
 
@@ -287,6 +289,7 @@ public void MatchTime()
     mIntake = Intake.getInstance();
     mLED = LED.getInstance();
     mElevator = Elevator.getInstance();
+    mClimber = Climber.getInstance();
     stopAllSubsystems();
   }
 
@@ -309,6 +312,7 @@ public void MatchTime()
       System.out.println("Disabled Init");
       mDrivetrain.highGear();
       mLED.Clear();
+      //mAutoExecuter.stop();
 		  stopAllSubsystems();
 		  updateAllSubsystems();
   }
@@ -317,11 +321,11 @@ public void MatchTime()
 	public void disabledPeriodic() {
 
   }
-  
+
   @Override
 	public void teleopInit(){
     System.out.println("Tele Init");
-    MatchTime();
+    //MatchTime();
 		stopAllSubsystems();
     mDrivetrain.lowGear();
     updateAllSubsystems();

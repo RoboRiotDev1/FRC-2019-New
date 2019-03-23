@@ -303,7 +303,7 @@ public boolean AutoLEDControl = false;
 //CAN
 
 //Drive Train )
-public static int kLeftFrontMotorId = 15;
+public static int kLeftFrontMotorId = 4;
 public static int kLeftRearMotorId = 1;
 public static int kRightFrontMotorId = 2;
 public static int kRightRearMotorId = 3;
