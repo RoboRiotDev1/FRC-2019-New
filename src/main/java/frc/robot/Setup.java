@@ -126,6 +126,15 @@ this.ControlBoard();
       return mDriverStick.getRawAxis(2) > .2;
     }
 
+    public boolean getDriverClimberBackRetractButton()
+    {
+      return mDriverStick.getRawButton(7);
+    }
+
+    public boolean getDriverClimberFrontRetractButton()
+    {
+      return mDriverStick.getRawButton(8);
+    }
     
     //SECONDARY CONTROLLER
 
@@ -277,6 +286,7 @@ void HardwareMap() {
 
 //-----------------------------------------------------------------------------------Not a Constant----------------------------------------------------------------------------------//
 public boolean AutoRunning = false;
+public boolean AutoLEDControl = false;
 //-----------------------------------------------------------------------------------Constants----------------------------------------------------------------------------------//
 
 /*------------------------------------------------- Port Assignments -----
@@ -309,10 +319,10 @@ public static int kSpoolId = 9;
 public static int kSpoolId1 = 10;
 
 //Climber
-public static int kClimber1Id = 11;
-public static int kClimber2Id = 11;
-public static int kClimber3Id = 11;
-
+public static int kClimberLeftId = 11;
+public static int kClimberRightId = 12;
+public static int kClimberBackId = 13;
+//Note Make PDP Board 14
 
 //SOLENOIDS (0-7)
 

@@ -50,15 +50,18 @@ public class Climber extends Subsystem {
     DigitalInput mClimber2Prox;
     DigitalInput mClimber3Prox;
 
+    //Constants
+    double ClimberSpeed = .25;
+
     public Climber(){
 	
-    	mClimber1 = new VictorSPX(Setup.kClimber1Id);
+    	mClimber1 = new VictorSPX(Setup.kClimberLeftId);
         mClimber1.setInverted(false);
         
-        mClimber2 = new VictorSPX(Setup.kClimber2Id);
+        mClimber2 = new VictorSPX(Setup.kClimberRightId);
         mClimber2.setInverted(false);
         
-        mClimber3 = new VictorSPX(Setup.kClimber3Id);
+        mClimber3 = new VictorSPX(Setup.kClimberBackId);
         mClimber3.setInverted(false);
         
         mClimber1Prox = new DigitalInput(Setup.kClimber1Prox);
@@ -69,11 +72,15 @@ public class Climber extends Subsystem {
 
 		}
     
-    private ClimberState mClimberState;
-    
     public enum ClimberState {
-    	Nothing, Climbing, Falling
+        Nothing, 
+        Climbing, 
+        Falling, 
+        RetractBack, 
+        RetrackFront
     }
+
+    private ClimberState  mClimberState = ClimberState.Nothing;
     
     public ClimberState getClimberStates(){
     	return mClimberState;
@@ -85,7 +92,7 @@ public class Climber extends Subsystem {
         
         if (mClimber1Prox.get() == false)
         {
-            mClimber1.set(ControlMode.PercentOutput, 1);
+            mClimber1.set(ControlMode.PercentOutput, ClimberSpeed);
         }
         else
         {
@@ -94,7 +101,7 @@ public class Climber extends Subsystem {
 
         if (mClimber2Prox.get() == false)
         {
-            mClimber2.set(ControlMode.PercentOutput, 1);
+            mClimber2.set(ControlMode.PercentOutput, ClimberSpeed);
         }
         else
         {
@@ -103,7 +110,7 @@ public class Climber extends Subsystem {
 
         if (mClimber3Prox.get() == false)
         {
-            mClimber3.set(ControlMode.PercentOutput, 1);
+            mClimber3.set(ControlMode.PercentOutput, ClimberSpeed);
         }
         else
         {
@@ -116,9 +123,20 @@ public class Climber extends Subsystem {
         
         mClimberState = ClimberState.Falling;
         
-        mClimber1.set(ControlMode.PercentOutput, -1);
-        mClimber2.set(ControlMode.PercentOutput, -1);
-        mClimber3.set(ControlMode.PercentOutput, -1);
+        mClimber1.set(ControlMode.PercentOutput, -ClimberSpeed);
+        mClimber2.set(ControlMode.PercentOutput, -ClimberSpeed);
+        mClimber3.set(ControlMode.PercentOutput, -ClimberSpeed);
+    }
+
+    public void RetractBack()
+    {
+        mClimber3.set(ControlMode.PercentOutput, -ClimberSpeed);
+    }
+
+    public void RetractFront()
+    {
+        mClimber1.set(ControlMode.PercentOutput, -ClimberSpeed);
+        mClimber2.set(ControlMode.PercentOutput, -ClimberSpeed);
     }
     
 

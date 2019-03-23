@@ -53,8 +53,10 @@ import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.LED;
 import frc.robot.auto.AutoExecuter;
+import frc.robot.auto.modes.MatchTime;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 
 
 public class Robot extends IterativeRobot  {
@@ -137,15 +139,26 @@ public void manual()
 
 
     //Climber
-    if(mSetup.getDriverClimbButton()){
+    if(mSetup.getDriverClimberBackRetractButton())
+    {
+      mClimber.RetractBack();
+    }
+
+    else if(mSetup.getDriverClimberFrontRetractButton())
+    {
+      mClimber.RetractFront();
+    }
+
+    else if(mSetup.getDriverClimbButton()){
       mClimber.Climb();
     }
     else if (mSetup.getDriverFallButton()){
       mClimber.Fall();
     }
-    // else {
-    //   mClimber.stop();
-    // }
+   else 
+    {
+      mClimber.stop();
+    }
 
     //Cargo Intake
 		if(mSetup.getSecondaryCargoIntakeButton()) {
@@ -194,6 +207,8 @@ public void manual()
      } 
 
      //LED Lights
+     if(mSetup.AutoLEDControl = false)
+     {
       if(mSetup.GetLEDClearButton()){
        mLED.Clear();
      }
@@ -222,8 +237,33 @@ public void manual()
        mLED.Clear();
      }
 
+     mSetup.mDriverStick.setRumble(RumbleType.kLeftRumble, 0);
+     mSetup.mDriverStick.setRumble(RumbleType.kRightRumble, 0);
+
+      mSetup.mSecondaryDriverStick.setRumble(RumbleType.kLeftRumble, 0);
+      mSetup.mSecondaryDriverStick.setRumble(RumbleType.kRightRumble, 0);
+
+
+    }
+    else
+    {
+      mLED.RedFlashyThing();
+
+      mSetup.mDriverStick.setRumble(RumbleType.kLeftRumble, 1);
+      mSetup.mDriverStick.setRumble(RumbleType.kRightRumble, 1);
+
+      mSetup.mSecondaryDriverStick.setRumble(RumbleType.kLeftRumble, 1);
+      mSetup.mSecondaryDriverStick.setRumble(RumbleType.kRightRumble, 1);
+    }
     updateAllSubsystems();
 
+}
+
+public void MatchTime()
+{
+  mAutoExecuter = new AutoExecuter();
+  mAutoExecuter.setAutoRoutine(new MatchTime());
+  mAutoExecuter.start();
 }
 
 /*------------------------------------------------- Robot Methods -----
@@ -268,6 +308,7 @@ public void manual()
 	public void disabledInit(){
       System.out.println("Disabled Init");
       mDrivetrain.highGear();
+      mLED.Clear();
 		  stopAllSubsystems();
 		  updateAllSubsystems();
   }
@@ -275,39 +316,12 @@ public void manual()
   @Override
 	public void disabledPeriodic() {
 
-	 //LED Lights Controls
-    if(mSetup.GetLEDClearButton()){
-     mLED.Clear();
-   }
-    if(mSetup.GetLEDRainbowButton()){
-      mLED.Rainbow();
-    }
-    if(mSetup.GetLEDCargoButton()){
-     mLED.Cargo();
-   }
-   if(mSetup.GetLEDRedFlashyThingButton()){
-     mLED.RedFlashyThing();
-   }
-   if(mSetup.GetLEDTeamBlueButton()){
-     mLED.TeamBlue();
-   }
-   if(mSetup.GetLEDTeamRedButton()){
-     mLED.TeamRed();
-   }
-   if(mSetup.GetLEDHatchButton()){
-     mLED.Hatch();
-   }
-   if(mSetup.GetLEDElevatorMaxHeightyButton()){
-     mLED.ElevatorMaxHeighty();
-   }
-   if(mSetup.GetLEDNoButton()){
-     mLED.Clear();
-   }
   }
-
+  
   @Override
 	public void teleopInit(){
     System.out.println("Tele Init");
+    MatchTime();
 		stopAllSubsystems();
     mDrivetrain.lowGear();
     updateAllSubsystems();
