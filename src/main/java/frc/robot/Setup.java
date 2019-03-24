@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.DigitalInput;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import frc.robot.subsystems.Climber;
 
 public class Setup
 {
@@ -118,12 +119,36 @@ this.ControlBoard();
     //Climber 
     public boolean getDriverClimbButton()
     {
-      return mDriverStick.getRawAxis(3) > .2;
+      return mDriverStick.getRawAxis(2) > .2;
+    }
+
+    public double getDriverFallAxis()
+    {
+      if (mDriverStick.getRawAxis(3) > .2)
+      {
+        return ClimberSpeed;
+      }
+      else
+      {
+        return 0.0;
+      }
+    }
+
+    public double getDriverClimbAxis()
+    {
+      if (mDriverStick.getRawAxis(2) > .2)
+      {
+        return ClimberSpeed;
+      }
+      else
+      {
+        return 0.0;
+      }
     }
 
     public boolean getDriverFallButton()
     {
-      return mDriverStick.getRawAxis(2) > .2;
+      return mDriverStick.getRawAxis(3) > .2;
     }
 
     public boolean getDriverClimberBackRetractButton()
@@ -268,9 +293,10 @@ void HardwareMap() {
         mIntakeRotaryHardware = new TalonSRX(Setup.kIntakeRotaryId);
 
         //Pneumatics
+        mCompressorHardware = new Compressor(0);
         mLeftShifterHardware = new Solenoid(Setup.kShifterSolenoidId);
         mRightShifterHardware = new Solenoid(Setup.kShifterSolenoidId);
-        mCompressorHardware = new Compressor(0);
+        
 
         //Sensors
         mGyro = new ADXRS450_Gyro();
@@ -342,10 +368,13 @@ public static int kElevatorTopProx = 1;
 public static int kIntakeCargoLimit = 2;
 public static int kIntakeHatchLimit = 3;
 public static int kElevatorLaser = 4;
-public static int kClimber1Prox = 5;
-public static int kClimber2Prox = 6;
-public static int kClimber3Prox = 7;
-public static int kLED1 = 8;
-public static int kLED2 = 9;
-public static int kLED3 = 10;
+public static int kLeftClimberLimitSwitch = 7; //left
+public static int kRightClimberLimitSwitch = 8; //Right
+public static int kBackClimberLimitSwitch = 6; //Back
+public static int kLED1 = 10;
+public static int kLED2 = 11;
+public static int kLED3 = 12;
+
+//Climber Speed
+public static double ClimberSpeed = -.8;
 }

@@ -153,6 +153,7 @@ public void manual()
 
     else if(mSetup.getDriverClimbButton()){
       mClimber.Climb();
+      mDrivetrain.setTankDriveSpeed(mSetup.getDriverClimbAxis() * .6, mSetup.getDriverClimbAxis() * .6);
     }
     else if (mSetup.getDriverFallButton()){
       mClimber.Fall();

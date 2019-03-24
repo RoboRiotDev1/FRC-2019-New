@@ -57,22 +57,22 @@ public class Drivetrain extends Subsystem {
     	mLeftFrontDrive = new CANSparkMax(Setup.kLeftFrontMotorId, MotorType.kBrushless);
     	mLeftFrontDrive.set(0);
 		mLeftFrontDrive.setInverted(false);
-		mLeftFrontDrive.setOpenLoopRampRate(.2);
+		mLeftFrontDrive.setOpenLoopRampRate(.02);
     	
         mRightFrontDrive = new CANSparkMax(Setup.kRightFrontMotorId, MotorType.kBrushless);
     	mRightFrontDrive.set(0);
 		mRightFrontDrive.setInverted(true);
-		mRightFrontDrive.setOpenLoopRampRate(.2);
+		mRightFrontDrive.setOpenLoopRampRate(.02);
     	
     	mLeftRearDrive = new CANSparkMax(Setup.kLeftRearMotorId, MotorType.kBrushless);
     	mLeftRearDrive.set(0);
     	mLeftRearDrive.setInverted(false);
-		mLeftRearDrive.setOpenLoopRampRate(.2);
+		mLeftRearDrive.setOpenLoopRampRate(.02);
 		
     	mRightRearDrive = new CANSparkMax(Setup.kRightRearMotorId, MotorType.kBrushless);
     	mRightRearDrive.set(0);
 		mRightRearDrive.setInverted(true);
-		mRightRearDrive.setOpenLoopRampRate(.2);
+		mRightRearDrive.setOpenLoopRampRate(.02);
 	
 		System.out.println("Drivetrain Done Initializing.");
 

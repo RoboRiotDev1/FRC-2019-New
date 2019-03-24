@@ -41,32 +41,32 @@ public class Climber extends Subsystem {
 	}
 	
     //Drive Motors
-    VictorSPX mClimber1;
-    VictorSPX mClimber2;
-    VictorSPX mClimber3;
+    VictorSPX mClimberLeft;
+    VictorSPX mClimberRight;
+    VictorSPX mClimberBack;
 
     //Prox Sensors
-    DigitalInput mClimber1Prox;
-    DigitalInput mClimber2Prox;
-    DigitalInput mClimber3Prox;
+    DigitalInput mClimberLeftLimitSwitch;
+    DigitalInput mClimberRightLimitSwitch;
+    DigitalInput mClimberBackLimitSwitch;
 
     //Constants
-    double ClimberSpeed = .25;
-
+    public double ClimberSpeed = Setup.ClimberSpeed;
+    Setup mSetup = new Setup();
     public Climber(){
 	
-    	mClimber1 = new VictorSPX(Setup.kClimberLeftId);
-        mClimber1.setInverted(false);
+    	mClimberLeft = new VictorSPX(Setup.kClimberLeftId);
+        mClimberLeft.setInverted(false);
         
-        mClimber2 = new VictorSPX(Setup.kClimberRightId);
-        mClimber2.setInverted(false);
+        mClimberRight = new VictorSPX(Setup.kClimberRightId);
+        mClimberRight.setInverted(false);
         
-        mClimber3 = new VictorSPX(Setup.kClimberBackId);
-        mClimber3.setInverted(false);
+        mClimberBack = new VictorSPX(Setup.kClimberBackId);
+        mClimberBack.setInverted(false);
         
-        mClimber1Prox = new DigitalInput(Setup.kClimber1Prox);
-        mClimber2Prox = new DigitalInput(Setup.kClimber2Prox);
-        mClimber3Prox = new DigitalInput(Setup.kClimber3Prox);
+        mClimberLeftLimitSwitch = new DigitalInput(Setup.kLeftClimberLimitSwitch);
+        mClimberRightLimitSwitch = new DigitalInput(Setup.kRightClimberLimitSwitch);
+        mClimberBackLimitSwitch = new DigitalInput(Setup.kBackClimberLimitSwitch);
         
         System.out.println("Climber Done Initializing.");
 
@@ -90,32 +90,32 @@ public class Climber extends Subsystem {
 
         mClimberState = ClimberState.Climbing;
         
-        if (mClimber1Prox.get() == false)
+        if (mClimberLeftLimitSwitch.get() == true)
         {
-            mClimber1.set(ControlMode.PercentOutput, ClimberSpeed);
+            mClimberLeft.set(ControlMode.PercentOutput, -ClimberSpeed);
         }
-        else
+        else if(mClimberLeftLimitSwitch.get() == false)
         {
-            mClimber1.set(ControlMode.PercentOutput, 0);
-        }
-
-        if (mClimber2Prox.get() == false)
-        {
-            mClimber2.set(ControlMode.PercentOutput, ClimberSpeed);
-        }
-        else
-        {
-            mClimber2.set(ControlMode.PercentOutput, 0);
+            mClimberLeft.set(ControlMode.PercentOutput, 0);
         }
 
-        if (mClimber3Prox.get() == false)
-        {
-            mClimber3.set(ControlMode.PercentOutput, ClimberSpeed);
-        }
-        else
-        {
-            mClimber3.set(ControlMode.PercentOutput, 0);
-        }
+         if (mClimberRightLimitSwitch.get() == true)
+         {
+             mClimberRight.set(ControlMode.PercentOutput, ClimberSpeed);
+         }
+         else if(mClimberRightLimitSwitch.get() == false)
+         {
+             mClimberRight.set(ControlMode.PercentOutput, 0);
+         }
+
+         if (mClimberBackLimitSwitch.get() == true)
+         {
+             mClimberBack.set(ControlMode.PercentOutput, -1);
+         }
+         else if(mClimberBackLimitSwitch.get() == false)
+         {
+             mClimberBack.set(ControlMode.PercentOutput, 0);
+         }
         
     }
 
@@ -123,20 +123,22 @@ public class Climber extends Subsystem {
         
         mClimberState = ClimberState.Falling;
         
-        mClimber1.set(ControlMode.PercentOutput, -ClimberSpeed);
-        mClimber2.set(ControlMode.PercentOutput, -ClimberSpeed);
-        mClimber3.set(ControlMode.PercentOutput, -ClimberSpeed);
+        mClimberLeft.set(ControlMode.PercentOutput, ClimberSpeed);
+        mClimberRight.set(ControlMode.PercentOutput, -ClimberSpeed);
+        mClimberBack.set(ControlMode.PercentOutput, -ClimberSpeed);
     }
 
     public void RetractBack()
     {
-        mClimber3.set(ControlMode.PercentOutput, -ClimberSpeed);
+        mClimberState = ClimberState.RetractBack;
+        mClimberBack.set(ControlMode.PercentOutput, .85);
     }
 
     public void RetractFront()
     {
-        mClimber1.set(ControlMode.PercentOutput, -ClimberSpeed);
-        mClimber2.set(ControlMode.PercentOutput, -ClimberSpeed);
+        mClimberState = ClimberState.RetrackFront;
+        mClimberLeft.set(ControlMode.PercentOutput, ClimberSpeed);
+        mClimberRight.set(ControlMode.PercentOutput, -ClimberSpeed);
     }
     
 
@@ -146,15 +148,17 @@ public class Climber extends Subsystem {
 
     	mClimberState = ClimberState.Nothing;
         
-        mClimber1.set(ControlMode.PercentOutput, 0);
-        mClimber2.set(ControlMode.PercentOutput, 0);
-        mClimber3.set(ControlMode.PercentOutput, 0);
+        mClimberLeft.set(ControlMode.PercentOutput, 0);
+        mClimberRight.set(ControlMode.PercentOutput, 0);
+        mClimberBack.set(ControlMode.PercentOutput, 0);
     }
     
     //Update
 	@Override
 	public void updateSubsystem() {
-        
+        System.out.println("Right Limit " +mClimberLeftLimitSwitch.get());
+        System.out.println("Left Limit " + mClimberLeftLimitSwitch.get());
+        System.out.println("Back Limit " + mClimberBackLimitSwitch.get());
 		outputToSmartDashboard();
 		
 	}

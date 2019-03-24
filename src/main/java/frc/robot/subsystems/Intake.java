@@ -268,7 +268,7 @@ public void setIntakeRotarySpeed()
 			setCargoIntakeSpeed(0);
 			break;
 		default:
-			mIntakeCargoState = IntakeCargoState.STOP;
+			//mIntakeCargoState = IntakeCargoState.STOP;
 			break;
 		}
 
@@ -300,7 +300,7 @@ public void setIntakeRotarySpeed()
 			setIntakeRotarySpeed();
 				break;
 			}
-			
+		System.out.println("Cargo Limit " + mIntakeCargoLimit.get());	
 		outputToSmartDashboard();
 	}
 
